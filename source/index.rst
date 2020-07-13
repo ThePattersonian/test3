@@ -10,6 +10,10 @@ Welcome to test3's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   PyCharm
+   Sphinx
+   git
+
 
 
 Indices and tables

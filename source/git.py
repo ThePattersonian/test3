@@ -23,3 +23,5 @@ be added all at once or just the updated ones using the following commands::
 
   There
 """
+def my_function():
+    pass
