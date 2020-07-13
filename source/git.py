@@ -21,7 +21,7 @@ be added all at once or just the updated ones using the following commands::
   git add -A
   git add -u
 
-  There
+There
 """
 def my_function():
     pass
