@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Python Module Index &#8212; test3 0.1.0 documentation</title>
+    <title>makefiles module &#8212; test3 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -14,18 +14,11 @@
     <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
-
-    <script>
-      DOCUMENTATION_OPTIONS.COLLAPSE_INDEX = true;
-    </script>
-
 
   </head><body>
   
@@ -37,73 +30,33 @@
 
           <div class="body" role="main">
             
-
-   <h1>Python Module Index</h1>
-
-   <div class="modindex-jumpbox">
-   <a href="#cap-c"><strong>c</strong></a> | 
-   <a href="#cap-g"><strong>g</strong></a> | 
-   <a href="#cap-m"><strong>m</strong></a> | 
-   <a href="#cap-p"><strong>p</strong></a> | 
-   <a href="#cap-s"><strong>s</strong></a> | 
-   <a href="#cap-t"><strong>t</strong></a>
-   </div>
-
-   <table class="indextable modindextable">
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-c"><td></td><td>
-       <strong>c</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="conf.html#module-conf"><code class="xref">conf</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-g"><td></td><td>
-       <strong>g</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="git.html#module-git"><code class="xref">git</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="githublab.html#module-githublab"><code class="xref">githublab</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-m"><td></td><td>
-       <strong>m</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="makefiles.html#module-makefiles"><code class="xref">makefiles</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-p"><td></td><td>
-       <strong>p</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="PyCharm.html#module-PyCharm"><code class="xref">PyCharm</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-s"><td></td><td>
-       <strong>s</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="Sphinx.html#module-Sphinx"><code class="xref">Sphinx</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-t"><td></td><td>
-       <strong>t</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="test2.html#module-test2"><code class="xref">test2</code></a></td><td>
-       <em></em></td></tr>
-   </table>
+  <div class="section" id="module-makefiles">
+<span id="makefiles-module"></span><h1>makefiles module<a class="headerlink" href="#module-makefiles" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="makefiles">
+<h2>Makefiles<a class="headerlink" href="#makefiles" title="Permalink to this headline">¶</a></h2>
+<p>I can’t say that I know much about Makefiles, but I do know that they can come
+in handy to speed up some processes. For instance here is a little thing I can
+enter on the command line to save me from having to type in more commands and
+help my workflow:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>gh-pages:
+ git checkout gh-pages
+ rm -rf build _sources _static _modules
+ git checkout master $(GH_PAGES_SOURCES)
+ git reset HEAD
+ make html
+ mv -fv build/html/* ./
+ rm -rf $(GH_PAGES_SOURCES) build
+ touch .nojekyll
+ git add -A
+ git commit -m &quot;Generated gh-pages for `git log master -1 --pretty=short --abbrev-commit`&quot;
+ git push origin gh-pages ; git checkout master
+ git branch
+</pre></div>
+</div>
+<p>This lets me push a version of my blog to a side branch, gh-pages, that is
+responsible for putting the HTML files on Github.io</p>
+</div>
+</div>
 
 
           </div>
@@ -166,6 +119,9 @@
       Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
+      |
+      <a href="_sources/makefiles.rst.txt"
+          rel="nofollow">Page source</a>
     </div>
 
     
