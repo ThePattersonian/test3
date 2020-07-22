@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Sphinx module &#8212; test3 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="git module" href="git.html" />
+    <link rel="prev" title="PyCharm module" href="PyCharm.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Sphinx">
+<span id="sphinx-module"></span><h1>Sphinx module<a class="headerlink" href="#module-Sphinx" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="sphinx">
+<h2>Sphinx<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a></h2>
+<p>This page will be dedicated to my experiences with learning about Sphinx.</p>
+<div class="section" id="first-steps">
+<h3>First Steps<a class="headerlink" href="#first-steps" title="Permalink to this headline">¶</a></h3>
+<p>First things first, make sure you have Sphinx installed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Sphinx</span>
+</pre></div>
+</div>
+<p>Now that Sphinx is installed, it helps to have a project created.
+For this project, Blog, I’m going to use itself as the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">Blog</span><span class="o">-</span><span class="n">master</span>
+<span class="n">cd</span> <span class="n">Blog</span><span class="o">-</span><span class="n">master</span>
+<span class="n">mkdir</span> <span class="n">Blog</span>
+<span class="n">mkdir</span> <span class="n">docs</span>
+<span class="n">cd</span> <span class="n">docs</span>
+</pre></div>
+</div>
+<p>Within this file structure, I’m going to place the actual code that I’m writing
+into the Blog folder and the documentation for the code will be going in to the
+docs directory.</p>
+<p>Yeah, I get that this is a little silly since the Blog itself probably won’t
+have much actual code, but it’s about the practice.</p>
+<p>To get Sphinx to create documentation, I’m need to run quickstart:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sphinx</span><span class="o">-</span><span class="n">quickstart</span>
+</pre></div>
+</div>
+<p>Much of the choices here are irrelevant but I said yes to separating my build
+and source directories.</p>
+<p>The next step is to write some actual files, for example this one, so that
+there’s some actual content. To begin with, I wrote HelloWorld, PyCharm, and
+Sphinx–all as Python files.</p>
+<p>Yes, I get that it’s silly to make Python files just to write in the docstring
+so that the docstring can then be converted into reStructured Text and then html
+but that’s kinda the point of this exercise.</p>
+<p>That being said, the next step is to create reStructured Text files that contain
+the content of these docstrings without having to do a whole lot of
+copy-and-pasting and reformatting. To do that, I’ll need the autodoc extension
+and to do that, I need to go over into the conf.py file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span> <span class="o">-</span><span class="n">a</span> <span class="s2">&quot;PyCharm CE&quot;</span> <span class="n">source</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Ok yeah, that’s overkill on instruction but hey, I need to learn more about
+command line inputs as well.</p>
+<p>While I’m in the configurations file, we should change a couple of things.
+To start with, uncomment and remove the space from the following lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># import os</span>
+<span class="c1"># import sys</span>
+<span class="c1"># sys.path.insert(0, os.path.abspath(&#39;.&#39;))</span>
+</pre></div>
+</div>
+<p>And I need to change that last one so it points at the directory with my actual
+content. That section should look like this now:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../../Blog&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Time to add autodoc into the extensions, along with Napoleon to read Numpy and
+Google style docstrings and, uh, coverage just to make sure I’m <em>covered</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sphinx.ext.autodoc&#39;</span><span class="p">,</span> <span class="s1">&#39;sphinx.ext.napoleon&#39;</span><span class="p">,</span>
+<span class="s1">&#39;sphinx.ext.coverage&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>ToDo: Figure out the ToDo extension. PyCharm makes this nice and yellow!</p>
+<p>Now that the configurations have been changed, I can creature the rST files that
+will point at the Python files using the following CLI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sphinx</span><span class="o">-</span><span class="n">apidoc</span> <span class="o">-</span><span class="n">o</span> <span class="n">source</span><span class="o">/</span> <span class="o">../</span><span class="n">Blog</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">source/</span></code> part is telling it to place the rST files into the source
+directory and <code class="docutils literal notranslate"><span class="pre">../Blog</span></code> tells it to read the Python files in Blog.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure to save the content as <code class="docutils literal notranslate"><span class="pre">.py</span></code> files and not plain text.</p>
+</div>
+<p>Now I’ve got a bunch of <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files sitting in my source folder that should
+look like the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Hello</span> <span class="n">World</span> <span class="n">module</span>
+<span class="o">==================</span>
+
+<span class="o">..</span> <span class="n">automodule</span><span class="p">::</span> <span class="n">HelloWorld</span>
+   <span class="p">:</span><span class="n">members</span><span class="p">:</span>
+   <span class="p">:</span><span class="n">undoc</span><span class="o">-</span><span class="n">members</span><span class="p">:</span>
+   <span class="p">:</span><span class="n">show</span><span class="o">-</span><span class="n">inheritance</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>I can then include these <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files in my <code class="docutils literal notranslate"><span class="pre">index.rst</span></code> under the toctree:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">toctree</span><span class="p">::</span>
+<span class="p">:</span><span class="n">maxdepth</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">:</span><span class="n">caption</span><span class="p">:</span> <span class="n">Contents</span><span class="p">:</span>
+
+<span class="n">Hello</span> <span class="n">World</span>
+<span class="n">PyCharm</span>
+<span class="n">Sphinx</span>
+</pre></div>
+</div>
+<p>And they should show up in the table of contents when I put everything together
+with <code class="docutils literal notranslate"><span class="pre">make</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p><em>et voila!</em></p>
+</div>
+</div>
+<div class="section" id="tl-dr">
+<h2>TL:DR<a class="headerlink" href="#tl-dr" title="Permalink to this headline">¶</a></h2>
+<p>Cheat sheet:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Install Sphinx</p></li>
+<li><p>Make a project directory with a <code class="docutils literal notranslate"><span class="pre">docs</span></code> directory and a <code class="docutils literal notranslate"><span class="pre">&lt;project&gt;</span></code> directory inside</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">sphinx-quickstart</span></code></p></li>
+<li><p>Make changes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../../Blog&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+<li><p>Add extensions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sphinx.ext.autodoc&#39;</span><span class="p">,</span> <span class="s1">&#39;sphinx.ext.napoleon&#39;</span><span class="p">,</span>
+<span class="s1">&#39;sphinx.ext.coverage&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">sphinx-apidoc</span> <span class="pre">-o</span> <span class="pre">source/</span> <span class="pre">../&lt;project&gt;</span></code></p></li>
+<li><p>Add the names of the modules in the <code class="docutils literal notranslate"><span class="pre">&lt;project&gt;</span></code> directory to <code class="docutils literal notranslate"><span class="pre">index.rst</span></code> under the toctree</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">make</span> <span class="pre">html</span></code></p></li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">test3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="PyCharm.html">PyCharm module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sphinx module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sphinx">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tl-dr">TL:DR</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">git module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="PyCharm.html" title="previous chapter">PyCharm module</a></li>
+      <li>Next: <a href="git.html" title="next chapter">git module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Ian Patterson.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/Sphinx.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
